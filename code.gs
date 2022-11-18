@@ -257,7 +257,7 @@ function onFormSubmit(event) {
           var sheet = SpreadsheetApp.getActive().getSheetByName("InvalidBets");
           sheet.appendRow([
             matchInfo[0],
-            matchInfo[1],
+            matchInfo[1].trim(),
             pName.join(),
             betValue,
             " Incorrect passcode entered - " + passcode,
@@ -270,7 +270,7 @@ function onFormSubmit(event) {
             var sheet = SpreadsheetApp.getActive().getSheetByName("Bets");
             sheet.appendRow([
               matchInfo[0],
-              matchInfo[1],
+              matchInfo[1].trim(),
               pName.join(),
               betValue,
               timeStamp,
@@ -280,7 +280,7 @@ function onFormSubmit(event) {
               SpreadsheetApp.getActive().getSheetByName("InvalidBets");
             sheet.appendRow([
               matchInfo[0],
-              matchInfo[1],
+              matchInfo[1].trim(),
               pName.join(),
               betValue,
               " Match started",
@@ -317,7 +317,18 @@ function getNextMatch(matchdate) {
     var date = data[i][2];
     //console.log('dd'+ date)
     if (date == matchdate) {
-      matches.push(data[i][4] + "-" + date + "@" + data[i][3]);
+      matches.push(
+        data[i][4] +
+          "-" +
+          date +
+          "@" +
+          data[i][3] +
+          " - (" +
+          data[i][4] +
+          " vs " +
+          data[i][8] +
+          ")"
+      );
     }
   }
   var form = FormApp.openById("1hSvfw9kTmFymwYN_eTV7qSycwTQlFbPsLNLcUFOscd8");
